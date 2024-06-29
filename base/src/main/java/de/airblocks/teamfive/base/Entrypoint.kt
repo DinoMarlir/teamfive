@@ -40,6 +40,8 @@ fun preStart() {
     initFolders()
     if (config.enableMojangAuth) MojangAuth.init()
 
+    MinecraftServer.setBrandName("TeamFive-Base")
+
     MinecraftServer.getConnectionManager().setPlayerProvider { uuid: UUID, username: String, playerConnection: PlayerConnection ->
         GamePlayer(uuid, username, playerConnection)
     }
