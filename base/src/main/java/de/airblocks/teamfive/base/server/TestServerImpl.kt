@@ -18,6 +18,10 @@ class TestServerImpl: GameServer(UUID.randomUUID().toString(), "Lobby") {
 
     }
 
+    override fun uninitializePlayer(player: GamePlayer) {
+        
+    }
+
     override val fallbackStrategy = FallbackStrategy.Fallback { event ->
         val instanceContainer = MinecraftServer.getInstanceManager().createInstanceContainer()
 
