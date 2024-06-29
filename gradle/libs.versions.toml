@@ -5,6 +5,7 @@ kotlinx-serialization = "1.6.3"
 coroutines = "1.9.0-RC"
 ktor = "2.3.12"
 shadow = "8.1.1"
+kyori-minimessage = "4.17.0"
 
 [libraries]
 minestom = { group = "net.minestom", name = "minestom-snapshots", version.ref = "minestom" }
@@ -14,6 +15,7 @@ ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref =
 ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+kyori-minimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "kyori-minimessage" }
 
 [plugins]
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -23,3 +25,4 @@ shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 [bundles]
 serialization = ["kotlinx-serialization-json"]
 ktor = ["ktor-client-core", "ktor-client-cio", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
+kyori = ["kyori-minimessage"]

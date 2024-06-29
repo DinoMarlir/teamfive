@@ -30,10 +30,11 @@ object DependencyHandler {
         load(Dependency("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.9.0-RC"))
     }
 
-    fun load(dependency: Dependency) {
+    fun load(dependency: Dependency, callback: (Dependency) -> Unit = {}) {
         println("Loading dependency $dependency")
         this.download(dependency)
         this.addToClassPath(Path("libraries/${dependency.fileName()}"))
+        callback.invoke(dependency)
     }
 
     fun getDependencies(): List<Dependency> {

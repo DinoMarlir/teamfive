@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.jvm)
+    alias(libs.plugins.serialization)
 }
 
 repositories {
@@ -9,4 +10,6 @@ repositories {
 dependencies {
     implementation(project(":base"))
     implementation(libs.minestom)
+    implementation(libs.bundles.serialization)
+    implementation(libs.bundles.kyori)
 }
