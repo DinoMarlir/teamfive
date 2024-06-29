@@ -14,7 +14,6 @@ import net.minestom.server.network.player.PlayerConnection
 import java.nio.file.Path
 import java.util.*
 
-
 val minecraftServer: MinecraftServer = MinecraftServer.init()
 
 private object MinecraftServerConfig: AbstractCachedConfig<MinecraftServerConfigModel>(

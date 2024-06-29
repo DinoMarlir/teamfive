@@ -12,6 +12,8 @@ abstract class GameServer(
     abstract fun disable()
     abstract val mainInstance: Instance
 
+    open val isFallback: Boolean = false
+
     fun getInstanceFactory(): GameServerInstanceFactory {
         return GameServerInstanceFactory()
     }
