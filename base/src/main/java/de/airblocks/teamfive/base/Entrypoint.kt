@@ -46,4 +46,6 @@ fun preStart() {
     }
 
     GameServerFactory.registerServer(TestServerImpl())
+
+    GameServerFactory.getAllServers().forEach { println(it.displayName) }
 }

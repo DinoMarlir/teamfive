@@ -15,6 +15,7 @@ object PlayerHandler {
         ) { event: AsyncPlayerConfigurationEvent ->
             val fallbackServer = GameServerFactory.getAllServers().firstOrNull { it.fallbackStrategy is FallbackStrategy.Fallback } ?: throw NoFallbackServerFoundException()
 
+            fallbackServer.players[event.player.uuid] = event.player
             fallbackServer.fallbackStrategy.asyncPlayerConfigurationEvent(event)
         }
     }

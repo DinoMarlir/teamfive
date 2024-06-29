@@ -15,11 +15,11 @@ class TestServerImpl: GameServer(UUID.randomUUID().toString(), "Lobby") {
     override fun disable() = Unit
 
     override fun initializePlayer(player: GamePlayer) {
-
+        player.sendMessage("Hello!")
     }
 
     override fun uninitializePlayer(player: GamePlayer) {
-        
+        player.sendMessage("Goodbye!")
     }
 
     override val fallbackStrategy = FallbackStrategy.Fallback { event ->
