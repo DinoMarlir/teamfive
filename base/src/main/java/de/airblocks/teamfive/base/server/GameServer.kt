@@ -1,7 +1,7 @@
 package de.airblocks.teamfive.base.server
 
+import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.instance.GameServerInstanceFactory
-import net.minestom.server.instance.Instance
 
 abstract class GameServer(
     val id: String,
@@ -10,9 +10,9 @@ abstract class GameServer(
 
     abstract fun enable()
     abstract fun disable()
-    abstract val mainInstance: Instance
+    abstract fun initializePlayer(player: GamePlayer)
 
-    open val isFallback: Boolean = false
+    open val fallbackStrategy: FallbackStrategy = FallbackStrategy.NoFallback
 
     fun getInstanceFactory(): GameServerInstanceFactory {
         return GameServerInstanceFactory()

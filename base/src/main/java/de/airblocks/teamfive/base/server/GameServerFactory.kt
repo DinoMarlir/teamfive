@@ -80,7 +80,7 @@ object GameServerFactory {
      *
      * @return A list of all registered servers.
      */
-    fun getAllServers(): List<String> {
-        return servers.keys.toList()
+    fun getAllServers(): List<GameServer> {
+        return servers.values.toList()
     }
 }
