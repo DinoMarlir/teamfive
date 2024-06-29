@@ -4,7 +4,13 @@ import de.airblocks.teamfive.base.component.BaseComponent
 import de.airblocks.teamfive.base.server.GameServerFactory
 
 class LobbyComponent: BaseComponent() {
+
+    companion object {
+        lateinit var instance: LobbyComponent
+    }
+
     override fun enable() {
+        instance = this
         println("LobbyComponent enabled!")
         val lobbyServer = LobbyServer("Lobby")
         GameServerFactory.registerServer(lobbyServer)
