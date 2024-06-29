@@ -7,7 +7,7 @@ import java.nio.file.Path
 
 val minecraftServer: MinecraftServer = MinecraftServer.init()
 
-object MinecraftServerConfig: AbstractCachedConfig<MinecraftServerConfigModel>(
+private object MinecraftServerConfig: AbstractCachedConfig<MinecraftServerConfigModel>(
     path = Path.of("config.json"),
     default = MinecraftServerConfigModel(
         "0.0.0.0",
@@ -17,7 +17,7 @@ object MinecraftServerConfig: AbstractCachedConfig<MinecraftServerConfigModel>(
     deserializer = MinecraftServerConfigModel.serializer()
 )
 
-val config = MinecraftServerConfig.get()
+private val config = MinecraftServerConfig.get()
 
 fun main() {
     minecraftServer.start(config.ip, config.port)
