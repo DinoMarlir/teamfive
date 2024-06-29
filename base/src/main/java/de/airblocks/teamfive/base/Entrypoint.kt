@@ -3,6 +3,7 @@ package de.airblocks.teamfive.base
 import de.airblocks.teamfive.base.models.MinecraftServerConfigModel
 import de.airblocks.teamfive.base.utils.AbstractCachedConfig
 import net.minestom.server.MinecraftServer
+import net.minestom.server.extras.MojangAuth
 import java.nio.file.Path
 
 val minecraftServer: MinecraftServer = MinecraftServer.init()
@@ -20,5 +21,6 @@ private object MinecraftServerConfig: AbstractCachedConfig<MinecraftServerConfig
 private val config = MinecraftServerConfig.get()
 
 fun main() {
+    if (config.enableMojangAuth) MojangAuth.init()
     minecraftServer.start(config.ip, config.port)
 }
