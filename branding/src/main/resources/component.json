@@ -1,0 +1,8 @@
+{
+  "name": "branding",
+  "authors": [
+    "DinoMarlir"
+  ],
+  "version": "0.1",
+  "mainClass": "de.airblocks.teamfive.branding.BrandingComponent"
+}
