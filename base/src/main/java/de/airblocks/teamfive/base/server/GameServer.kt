@@ -6,6 +6,9 @@ import net.kyori.adventure.text.Component
 import net.minestom.server.entity.Player
 import java.util.*
 
+/**
+ * This class represents a game server.
+ */
 abstract class GameServer(
     val id: String,
     val displayName: String
