@@ -64,6 +64,12 @@ val CONFIG_FOLDER = File(ROOT_FOLDER, "config")
 val LOG_FOLDER = File(ROOT_FOLDER, "logs")
 
 /**
+ * A reference to the components directory of the application.
+ * This directory is used to store component files.
+ */
+val COMPONENT_FOLDER = File(ROOT_FOLDER, "components")
+
+/**
  * Initializes the directories used by the application.
  * If a directory does not exist, it is created.
  */
@@ -71,4 +77,5 @@ internal fun initFolders() {
     if (!DATA_FOLDER.exists()) DATA_FOLDER.mkdirs()
     if (!CONFIG_FOLDER.exists()) CONFIG_FOLDER.mkdirs()
     if (!LOG_FOLDER.exists()) LOG_FOLDER.mkdirs()
+    if (!COMPONENT_FOLDER.exists()) COMPONENT_FOLDER.mkdirs()
 }

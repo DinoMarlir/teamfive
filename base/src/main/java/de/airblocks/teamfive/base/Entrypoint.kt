@@ -1,6 +1,7 @@
 package de.airblocks.teamfive.base
 
 import de.airblocks.teamfive.base.commands.ServerCommand
+import de.airblocks.teamfive.base.component.ComponentLoader
 import de.airblocks.teamfive.base.dependency.DependencyHandler
 import de.airblocks.teamfive.base.models.MinecraftServerConfigModel
 import de.airblocks.teamfive.base.player.GamePlayer
@@ -32,6 +33,7 @@ fun main() {
     preStart()
     PlayerHandler.init()
     MinecraftServer.getCommandManager().register(ServerCommand)
+    ComponentLoader.INSTANCE.initialize()
     minecraftServer.start(config.ip, config.port)
 }
 

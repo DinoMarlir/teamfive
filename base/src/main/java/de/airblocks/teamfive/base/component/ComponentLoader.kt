@@ -1,5 +1,6 @@
 package de.airblocks.teamfive.base.component
 
+import de.airblocks.teamfive.base.utils.COMPONENT_FOLDER
 import de.airblocks.teamfive.base.utils.JSON
 import java.net.URLClassLoader
 import java.nio.file.Files
@@ -9,8 +10,12 @@ import java.util.jar.JarFile
 
 class ComponentLoader {
 
+    companion object {
+        val INSTANCE = ComponentLoader()
+    }
+
     fun initialize() {
-        val dir = Paths.get("components/")
+        val dir = Paths.get(COMPONENT_FOLDER.path)
         Files.newDirectoryStream(dir, "*.jar").use { paths ->
             paths.forEach { path ->
                 loadComponent(path)
