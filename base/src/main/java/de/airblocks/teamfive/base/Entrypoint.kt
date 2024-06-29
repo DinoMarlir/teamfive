@@ -1,5 +1,6 @@
 package de.airblocks.teamfive.base
 
+import de.airblocks.teamfive.base.commands.ServerCommand
 import de.airblocks.teamfive.base.models.MinecraftServerConfigModel
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.player.PlayerHandler
@@ -10,6 +11,7 @@ import de.airblocks.teamfive.base.utils.initFolders
 import net.minestom.server.MinecraftServer
 import net.minestom.server.extras.MojangAuth
 import net.minestom.server.network.player.PlayerConnection
+import net.minestom.server.network.socket.Server
 import java.nio.file.Path
 import java.util.*
 
@@ -30,6 +32,7 @@ private val config = MinecraftServerConfig.get()
 fun main() {
     preStart()
     PlayerHandler.init()
+    MinecraftServer.getCommandManager().register(ServerCommand)
     minecraftServer.start(config.ip, config.port)
 }
 
@@ -42,4 +45,5 @@ fun preStart() {
     }
 
     GameServerFactory.registerServer(TestServerImpl())
+    GameServerFactory.getAllServers().forEach { println(it.displayName) }
 }

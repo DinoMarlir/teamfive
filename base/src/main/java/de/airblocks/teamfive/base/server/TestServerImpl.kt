@@ -9,7 +9,7 @@ import net.minestom.server.instance.generator.GenerationUnit
 import java.util.*
 
 // TODO: remove
-class TestServerImpl: GameServer(UUID.randomUUID().toString(), "Test") {
+class TestServerImpl: GameServer(UUID.randomUUID().toString(), "Lobby") {
 
     override fun enable() = Unit
 

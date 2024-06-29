@@ -36,6 +36,7 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
      * @param server The server to send the player to.
      */
     fun sendToServer(server: GameServer) {
+        server.initializePlayer(this)
         // TODO: Implement this method to send the player to the specified server
     }
 }
