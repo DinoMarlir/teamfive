@@ -1,11 +1,11 @@
 package de.airblocks.teamfive.base
 
 import de.airblocks.teamfive.base.commands.ServerCommand
+import de.airblocks.teamfive.base.dependency.DependencyHandler
 import de.airblocks.teamfive.base.models.MinecraftServerConfigModel
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.player.PlayerHandler
 import de.airblocks.teamfive.base.server.GameServerFactory
-import de.airblocks.teamfive.base.server.TestServerImpl
 import de.airblocks.teamfive.base.utils.AbstractCachedConfig
 import de.airblocks.teamfive.base.utils.initFolders
 import net.minestom.server.MinecraftServer
@@ -36,6 +36,7 @@ fun main() {
 }
 
 fun preStart() {
+    DependencyHandler
     initFolders()
     if (config.enableMojangAuth) MojangAuth.init()
 
@@ -44,8 +45,6 @@ fun preStart() {
     MinecraftServer.getConnectionManager().setPlayerProvider { uuid: UUID, username: String, playerConnection: PlayerConnection ->
         GamePlayer(uuid, username, playerConnection)
     }
-
-    GameServerFactory.registerServer(TestServerImpl())
 
     GameServerFactory.getAllServers().forEach { println(it.displayName) }
 }

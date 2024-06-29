@@ -2,14 +2,24 @@
 kotlin = "2.0.0"
 minestom = "edb73f0a5a"
 kotlinx-serialization = "1.6.3"
+coroutines = "1.9.0-RC"
+ktor = "2.3.12"
+shadow = "8.1.1"
 
 [libraries]
 minestom = { group = "net.minestom", name = "minestom-snapshots", version.ref = "minestom" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 [plugins]
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 
 [bundles]
 serialization = ["kotlinx-serialization-json"]
+ktor = ["ktor-client-core", "ktor-client-cio", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]

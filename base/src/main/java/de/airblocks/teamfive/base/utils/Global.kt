@@ -4,6 +4,13 @@
  */
 package de.airblocks.teamfive.base.utils
 
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import java.io.File
 
@@ -14,6 +21,23 @@ import java.io.File
 val JSON = Json {
     prettyPrint = true
     ignoreUnknownKeys = true
+}
+
+/**
+ * A coroutine scope used for IO operations.
+ */
+val mainScope = CoroutineScope(Dispatchers.IO)
+
+/**
+ * A HTTP client used for network operations.
+ */
+val httpClient = HttpClient(CIO) {
+    install(ContentNegotiation) {
+        json(JSON)
+    }
+    install(HttpTimeout) {
+        requestTimeoutMillis = 120*1000
+    }
 }
 
 /**
