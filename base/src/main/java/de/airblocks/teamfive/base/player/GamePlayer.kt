@@ -18,6 +18,10 @@ import java.util.*
  */
 class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnection): Player(uuid, username, playerConnection) {
 
+    fun currentServer(): GameServer {
+        return GameServerFactory.getAllServers().first { it.players.containsKey(uuid) }
+    }
+
     /**
      * Sends the player to a server with the given name.
      * If no server with the given name exists, a GameServerNotExistsException is thrown.
@@ -36,6 +40,7 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
      * @param server The server to send the player to.
      */
     fun sendToServer(server: GameServer) {
+        currentServer().uninitializePlayer(this)
         server.initializePlayer(this)
         // TODO: Implement this method to send the player to the specified server
     }

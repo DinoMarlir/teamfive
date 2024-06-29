@@ -16,6 +16,7 @@ abstract class GameServer(
     abstract fun enable()
     abstract fun disable()
     abstract fun initializePlayer(player: GamePlayer)
+    abstract fun uninitializePlayer(player: GamePlayer)
 
     open val fallbackStrategy: FallbackStrategy = FallbackStrategy.NoFallback
 
