@@ -1,15 +1,21 @@
 package de.airblocks.teamfive.base.server
 
+import de.airblocks.teamfive.base.server.exception.GameServerNotExistsException
+
 object GameServerFactory {
 
     private val servers: MutableMap<String, GameServer> = mutableMapOf()
 
     fun registerServer(server: GameServer) {
-        servers[server.name] = server
+        servers[server.displayName] = server
     }
 
     fun getServerByName(name: String): GameServer? {
         return servers[name]
+    }
+
+    fun getServerByNameOrThrow(name: String): GameServer {
+        return servers[name] ?: throw GameServerNotExistsException()
     }
 
     fun startServer(server: GameServer) {
@@ -18,14 +24,14 @@ object GameServerFactory {
 
     fun stopServer(server: GameServer) {
         server.stop {
-            servers.remove(server.name)
+            servers.remove(server.displayName)
         }
     }
 
     fun stopAll() {
         servers.values.forEach {
             it.stop {
-                servers.remove(it.name)
+                servers.remove(it.displayName)
             }
         }
     }
