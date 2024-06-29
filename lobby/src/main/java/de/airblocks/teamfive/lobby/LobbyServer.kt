@@ -4,6 +4,7 @@ import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.FallbackStrategy
 import de.airblocks.teamfive.base.server.GameServer
 import net.minestom.server.MinecraftServer
+import net.minestom.server.coordinate.Pos
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
 import java.util.*
@@ -25,8 +26,10 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
     override fun uninitializePlayer(player: GamePlayer) {
     }
 
-    override val fallbackStrategy = FallbackStrategy.Fallback {
-
+    override val fallbackStrategy = FallbackStrategy.Fallback { event ->
+        val player: GamePlayer = event.player as GamePlayer
+        event.spawningInstance = INSTANCE
+        player.respawnPoint = Pos(0.0, 42.0, 0.0)
     }
 
     val INSTANCE = MinecraftServer.getInstanceManager().createInstanceContainer()
