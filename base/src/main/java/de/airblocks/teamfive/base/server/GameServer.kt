@@ -1,14 +1,17 @@
 package de.airblocks.teamfive.base.server
 
-import net.minestom.server.entity.Player
-
 abstract class GameServer(
     val name: String
-) {
+): Thread("GAME_SERVER_THREAD#$name") {
 
-    val players: MutableList<Player> = mutableListOf()
+    abstract fun enable()
+    abstract fun disable()
 
-    fun start() {
+    init {
+        isDaemon = true
+    }
+
+    override fun run() {
         enable()
     }
 
@@ -16,9 +19,7 @@ abstract class GameServer(
         callback: () -> Unit = {}
     ) {
         disable()
+        interrupt()
         callback.invoke()
     }
-
-    abstract fun enable()
-    abstract fun disable()
 }
