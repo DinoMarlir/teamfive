@@ -5,8 +5,8 @@ import net.minestom.server.instance.Instance
 
 abstract class GameServer(
     val id: String,
-    val name: String
-): Thread("GAME_SERVER_THREAD#$name") {
+    val displayName: String
+): Thread("GAME_SERVER_THREAD#$displayName") {
 
     abstract fun enable()
     abstract fun disable()
