@@ -2,11 +2,16 @@ package de.airblocks.teamfive.base.server
 
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.instance.GameServerInstanceFactory
+import net.kyori.adventure.text.Component
+import net.minestom.server.entity.Player
+import java.util.UUID
 
 abstract class GameServer(
     val id: String,
     val displayName: String
 ): Thread("GAME_SERVER_THREAD#$displayName") {
+
+    val players: MutableMap<UUID, Player> = mutableMapOf()
 
     abstract fun enable()
     abstract fun disable()
@@ -32,5 +37,9 @@ abstract class GameServer(
         disable()
         interrupt()
         callback.invoke()
+    }
+
+    fun broadcastMessage(message: Component) {
+        players.values.forEach { it.sendMessage(message) }
     }
 }
