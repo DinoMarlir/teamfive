@@ -2,6 +2,7 @@ package de.airblocks.teamfive.base
 
 import de.airblocks.teamfive.base.models.MinecraftServerConfigModel
 import de.airblocks.teamfive.base.utils.AbstractCachedConfig
+import de.airblocks.teamfive.base.utils.initFolders
 import net.minestom.server.MinecraftServer
 import net.minestom.server.extras.MojangAuth
 import java.nio.file.Path
@@ -21,6 +22,11 @@ private object MinecraftServerConfig: AbstractCachedConfig<MinecraftServerConfig
 private val config = MinecraftServerConfig.get()
 
 fun main() {
-    if (config.enableMojangAuth) MojangAuth.init()
+    preStart()
     minecraftServer.start(config.ip, config.port)
+}
+
+fun preStart() {
+    initFolders()
+    if (config.enableMojangAuth) MojangAuth.init()
 }
