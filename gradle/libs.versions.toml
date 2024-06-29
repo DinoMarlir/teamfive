@@ -1,0 +1,15 @@
+[versions]
+kotlin = "2.0.0"
+minestom = "edb73f0a5a"
+kotlinx-serialization = "1.6.3"
+
+[libraries]
+minestom = { group = "net.minestom", name = "minestom-snapshots", version.ref = "minestom" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+[plugins]
+jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+[bundles]
+serialization = ["kotlinx-serialization-json"]
