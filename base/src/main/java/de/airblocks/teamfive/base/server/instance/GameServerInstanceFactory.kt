@@ -1,6 +1,5 @@
 package de.airblocks.teamfive.base.server.instance
 
-import net.kyori.adventure.text.Component
 import net.minestom.server.instance.Instance
 
 class GameServerInstanceFactory {

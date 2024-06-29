@@ -2,12 +2,10 @@ package de.airblocks.teamfive.base.commands
 
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.GameServerFactory
-import net.kyori.adventure.text.Component
 import net.minestom.server.MinecraftServer
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.suggestion.SuggestionEntry
-import net.minestom.server.network.player.PlayerConnection
 
 object ServerCommand: Command("server", "swap") {
 

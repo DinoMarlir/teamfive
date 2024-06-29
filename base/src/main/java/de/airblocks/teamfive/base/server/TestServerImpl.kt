@@ -3,7 +3,6 @@ package de.airblocks.teamfive.base.server
 import de.airblocks.teamfive.base.player.GamePlayer
 import net.minestom.server.MinecraftServer
 import net.minestom.server.coordinate.Pos
-import net.minestom.server.instance.Instance
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
 import java.util.*

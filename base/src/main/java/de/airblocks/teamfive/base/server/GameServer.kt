@@ -4,7 +4,7 @@ import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.instance.GameServerInstanceFactory
 import net.kyori.adventure.text.Component
 import net.minestom.server.entity.Player
-import java.util.UUID
+import java.util.*
 
 abstract class GameServer(
     val id: String,
