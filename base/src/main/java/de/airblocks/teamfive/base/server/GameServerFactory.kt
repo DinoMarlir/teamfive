@@ -21,7 +21,7 @@ object GameServerFactory {
             servers.remove(server.name)
         }
     }
-    
+
     fun stopAll() {
         servers.values.forEach {
             it.stop {
