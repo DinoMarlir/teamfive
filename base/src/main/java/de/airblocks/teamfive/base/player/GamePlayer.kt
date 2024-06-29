@@ -18,6 +18,13 @@ import java.util.*
  */
 class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnection): Player(uuid, username, playerConnection) {
 
+    /**
+     * Returns the current server that the player is connected to.
+     * It iterates over all servers and returns the first one where the player is present.
+     *
+     * @return The current server of the player.
+     * @throws NoSuchElementException If no server with the player exists.
+     */
     fun currentServer(): GameServer {
         return GameServerFactory.getAllServers().first { it.players.containsKey(uuid) }
     }
