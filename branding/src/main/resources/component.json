@@ -3,6 +3,13 @@
   "authors": [
     "DinoMarlir"
   ],
-  "version": "0.1",
-  "mainClass": "de.airblocks.teamfive.branding.BrandingComponent"
+  "version": "1.0",
+  "mainClass": "de.airblocks.teamfive.branding.BrandingComponent",
+  "libraries": [
+    {
+      "groupId": "net.kyori",
+      "artifactId": "adventure-text-minimessage",
+      "version": "4.17.0"
+    }
+  ]
 }

@@ -1,7 +1,9 @@
 package de.airblocks.teamfive.base.dependency
 
+import kotlinx.serialization.Serializable
 import java.io.File
 
+@Serializable
 class Dependency(
     private var groupId: String,
     var artifactId: String,

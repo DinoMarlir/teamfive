@@ -1,5 +1,6 @@
 package de.airblocks.teamfive.base.component
 
+import de.airblocks.teamfive.base.dependency.DependencyHandler
 import de.airblocks.teamfive.base.utils.COMPONENT_FOLDER
 import de.airblocks.teamfive.base.utils.JSON
 import java.net.URLClassLoader
@@ -25,12 +26,14 @@ class ComponentLoader {
 
     fun loadComponent(path: Path) {
         val jarFile = JarFile(path.toFile())
-        val classLoader = URLClassLoader(arrayOf(path.toFile().toURI().toURL()))
-
         val jsonEntry = jarFile.getJarEntry("component.json")
         val componentInfo = jarFile.getInputStream(jsonEntry).reader().use { reader ->
             JSON.decodeFromString<ComponentInfo>(reader.readText())
         }
+
+        componentInfo.libraries.forEach { DependencyHandler.load(it) }
+
+        val classLoader = URLClassLoader(arrayOf(path.toFile().toURI().toURL()))
 
         val clazz = Class.forName(componentInfo.mainClass, true, classLoader)
         val component = clazz.getDeclaredConstructor().newInstance() as BaseComponent

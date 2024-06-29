@@ -8,8 +8,6 @@ class BrandingComponent: BaseComponent() {
 
     override fun enable() {
         DependencyHandler.load(Dependency("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.6.3"))
-        DependencyHandler.load(Dependency("net.kyori", "adventure-text-minimessage", "4.17.0")) {
-            Branding().apply()
-        }
+        Branding().apply()
     }
 }
