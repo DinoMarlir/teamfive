@@ -45,7 +45,6 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
 
     override fun initializePlayer(player: GamePlayer) {
         updateInventoryForPlayer(player)
-        QueueBossbarDisplay.addPlayer(player)
     }
 
     override fun uninitializePlayer(player: GamePlayer) {
