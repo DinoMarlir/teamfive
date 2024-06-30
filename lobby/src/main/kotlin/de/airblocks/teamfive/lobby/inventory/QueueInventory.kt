@@ -3,11 +3,8 @@ package de.airblocks.teamfive.lobby.inventory
 import de.airblocks.teamfive.lobby.LobbyServer
 import de.airblocks.teamfive.lobby.queue.Queue
 import de.airblocks.teamfive.lobby.queue.exception.QueueFullException
-import net.minestom.server.entity.Metadata
 import net.minestom.server.entity.Player
-import net.minestom.server.entity.metadata.display.ItemDisplayMeta
 import net.minestom.server.event.EventListener
-import net.minestom.server.event.inventory.InventoryClickEvent
 import net.minestom.server.event.inventory.InventoryPreClickEvent
 import net.minestom.server.inventory.Inventory
 import net.minestom.server.inventory.InventoryType
