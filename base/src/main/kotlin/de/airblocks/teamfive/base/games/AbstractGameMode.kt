@@ -8,4 +8,7 @@ abstract class AbstractGameMode {
     abstract val description: Component
 
     abstract val gameServer: (id: String, displayName: String) -> GameServer
+
+    abstract val minPlayersToStart: Int
+    abstract val maxPlayers: Int
 }

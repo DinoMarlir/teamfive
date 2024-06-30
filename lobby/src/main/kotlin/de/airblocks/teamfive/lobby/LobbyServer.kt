@@ -16,7 +16,7 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import java.util.*
 
-class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(), displayName){
+class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(), displayName) {
 
     override fun enable() {
         INSTANCE.setGenerator { unit: GenerationUnit ->
