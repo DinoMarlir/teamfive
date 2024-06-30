@@ -32,6 +32,8 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
         } catch (e: QueueFullException) {
             player.sendMessage("Queue is full")
         }
+
+        event.isCancelled = true
     }
 
     val playerSchedeulerMap: MutableMap<Player, Task> = mutableMapOf()
@@ -54,14 +56,14 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
             addListener(INVENTORY_CLICK_LISTENER)
         }
 
-        val task = MinecraftServer.getSchedulerManager().submitTask {
+        title = buildTitleForPlayer(player)
 
+        val task = MinecraftServer.getSchedulerManager().submitTask {
             LobbyServer.queues.values.forEach {
                 player.sendMessage(it.name)
             }
-
-            title = Component.text("Queue: ").append(player.currentQueue()?.name ?: Component.text("none"))
-            return@submitTask TaskSchedule.seconds(5)
+            title = buildTitleForPlayer(player)
+            return@submitTask TaskSchedule.seconds(1)
         }
 
         playerSchedeulerMap[player] = task
@@ -85,5 +87,9 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
             it.customName(queue.name)
             it.setTag(Tag.String("queue_name"), queue.name.toString())
         }
+    }
+
+    fun buildTitleForPlayer(player: Player): Component {
+        return Component.text("Queue: ").append(player.currentQueue()?.name ?: Component.text("none"))
     }
 }
