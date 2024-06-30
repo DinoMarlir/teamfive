@@ -6,16 +6,16 @@ import net.kyori.adventure.text.Component
 
 class DummyGame: AbstractGameMode() {
     override val name: net.kyori.adventure.text.Component
-        get() = Component.text("Hey")
+        get() = Component.text("DummyGame")
     override val description: net.kyori.adventure.text.Component
-        get() = Component.text("Hey")
+        get() = Component.text("A demo game mode.")
     override val gameServer: (id: String, displayName: String) -> GameServer
         get() = {
             id: String, displayName: String ->
             DummyGameServer(id, displayName)
         }
     override val minPlayersToStart: Int
-        get() = 11
+        get() = 6
     override val maxPlayers: Int
-        get() = 14
+        get() = 12
 }
