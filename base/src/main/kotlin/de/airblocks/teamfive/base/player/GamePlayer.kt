@@ -51,6 +51,5 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
         currentServer().players.remove(uuid)
         server.initializePlayer(this)
         server.players[uuid] = this
-        // TODO: Implement this method to send the player to the specified server
     }
 }

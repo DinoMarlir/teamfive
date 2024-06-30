@@ -6,6 +6,7 @@ import de.airblocks.teamfive.lobby.queue.exception.QueueFullException
 import net.kyori.adventure.text.Component
 import net.minestom.server.entity.Player
 
+// TODO: Implement game start in queue
 abstract class Queue<G: AbstractGameMode> {
     private val playersIn: MutableList<Player> = mutableListOf()
 
