@@ -5,6 +5,7 @@ import de.airblocks.teamfive.base.games.GamesRegistry
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.FallbackStrategy
 import de.airblocks.teamfive.base.server.GameServer
+import de.airblocks.teamfive.lobby.display.QueueBossbarDisplay
 import de.airblocks.teamfive.lobby.inventory.updateInventoryForPlayer
 import de.airblocks.teamfive.lobby.listener.initializeListener
 import de.airblocks.teamfive.lobby.queue.Queue
@@ -36,6 +37,7 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
         }
 
         initializeListener()
+        QueueBossbarDisplay.initialize()
     }
 
     override fun disable() {
@@ -43,6 +45,7 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
 
     override fun initializePlayer(player: GamePlayer) {
         updateInventoryForPlayer(player)
+        QueueBossbarDisplay.addPlayer(player)
     }
 
     override fun uninitializePlayer(player: GamePlayer) {
