@@ -1,0 +1,8 @@
+{
+  "name": "dummygame",
+  "authors": [
+    "DinoMarlir"
+  ],
+  "version": "0.1",
+  "mainClass": "de.airblocks.teamfive.dummygame.DummyGameComponent"
+}
