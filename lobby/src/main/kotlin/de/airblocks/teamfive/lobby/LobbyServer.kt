@@ -20,7 +20,6 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
     companion object {
         private val _queues: MutableMap<AbstractGameMode, Queue<*>> = mutableMapOf()
         val queues: MutableMap<AbstractGameMode, Queue<*>> get() {
-
             GamesRegistry.getAllGameModes().map {
                 it to QueueImpl<AbstractGameMode>(name = it.name, maxPlayers = it.maxPlayers, minPlayersToStart = it.minPlayersToStart)
             }.forEach {

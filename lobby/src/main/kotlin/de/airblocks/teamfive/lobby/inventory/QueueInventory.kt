@@ -52,7 +52,6 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
     override fun addViewer(player: Player): Boolean {
         with(player.eventNode()) {
             addListener(INVENTORY_CLICK_LISTENER)
-
         }
 
         val task = MinecraftServer.getSchedulerManager().submitTask {

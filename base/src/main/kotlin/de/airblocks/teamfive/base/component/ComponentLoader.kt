@@ -4,7 +4,6 @@ import de.airblocks.teamfive.base.dependency.DependencyHandler
 import de.airblocks.teamfive.base.utils.COMPONENT_FOLDER
 import de.airblocks.teamfive.base.utils.CustomURLClassLoader
 import de.airblocks.teamfive.base.utils.JSON
-import java.net.URLClassLoader
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
