@@ -1,22 +1,35 @@
 package de.airblocks.teamfive.lobby
 
+import de.airblocks.teamfive.base.games.AbstractGameMode
+import de.airblocks.teamfive.base.games.GamesRegistry
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.FallbackStrategy
 import de.airblocks.teamfive.base.server.GameServer
-import de.airblocks.teamfive.base.server.GameServerFactory
-import net.kyori.adventure.text.Component
+import de.airblocks.teamfive.lobby.inventory.QueueInventory
 import net.minestom.server.MinecraftServer
 import net.minestom.server.coordinate.Pos
 import net.minestom.server.event.player.PlayerBlockInteractEvent
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
-import net.minestom.server.inventory.Inventory
-import net.minestom.server.inventory.InventoryType
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import java.util.*
+import de.airblocks.teamfive.lobby.queue.Queue
+import de.airblocks.teamfive.lobby.queue.QueueImpl
 
 class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(), displayName) {
+
+    companion object {
+        private val _queues: MutableMap<AbstractGameMode, Queue<*>> = mutableMapOf()
+        val queues: MutableMap<AbstractGameMode, Queue<*>> get() {
+            _queues.putAll(
+                GamesRegistry.getAllGameModes().map {
+                    it to QueueImpl<AbstractGameMode>(name = it.name, maxPlayers = it.maxPlayers, minPlayersToStart = it.minPlayersToStart)
+                }.toMap()
+            )
+            return _queues
+        }
+    }
 
     override fun enable() {
         INSTANCE.setGenerator { unit: GenerationUnit ->
@@ -24,18 +37,8 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
         }
 
         INSTANCE.eventNode().addListener(PlayerBlockInteractEvent::class.java) { event ->
-            event.player.sendMessage("Hi")
-            if (!event.player.itemInMainHand.isSimilar(ItemStack.of(Material.RECOVERY_COMPASS))) {
-                return@addListener
-            }
-
-            val inventory: Inventory = Inventory(InventoryType.CHEST_3_ROW, "Servers")
-
-            GameServerFactory.getAllServers().forEach {
-                inventory.addItemStack(ItemStack.of(Material.SLIME_BLOCK).withCustomName(Component.text(it.displayName)))
-            }
-
-            event.player.openInventory(inventory)
+            val queueInventory = QueueInventory()
+            event.player.openInventory(queueInventory)
         }
     }
 
