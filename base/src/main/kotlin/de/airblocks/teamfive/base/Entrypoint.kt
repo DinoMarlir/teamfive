@@ -9,6 +9,7 @@ import de.airblocks.teamfive.base.player.PlayerHandler
 import de.airblocks.teamfive.base.server.GameServerFactory
 import de.airblocks.teamfive.base.utils.AbstractCachedConfig
 import de.airblocks.teamfive.base.utils.initFolders
+import net.kyori.adventure.text.minimessage.MiniMessage
 import net.minestom.server.MinecraftServer
 import net.minestom.server.extras.MojangAuth
 import net.minestom.server.network.player.PlayerConnection

@@ -1,5 +1,6 @@
 package de.airblocks.teamfive.base.dependency
 
+import de.airblocks.teamfive.base.utils.CustomURLClassLoader
 import de.airblocks.teamfive.base.utils.httpClient
 import de.airblocks.teamfive.base.utils.mainScope
 import io.ktor.client.request.*
@@ -9,8 +10,6 @@ import io.ktor.util.cio.*
 import io.ktor.utils.io.*
 import kotlinx.coroutines.launch
 import java.io.File
-import java.net.URL
-import java.net.URLClassLoader
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.Path
@@ -28,6 +27,7 @@ object DependencyHandler {
         load(Dependency("net.minestom", "minestom-snapshots", "edb73f0a5a"))
         load(Dependency("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.6.3"))
         load(Dependency("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.9.0-RC"))
+        load(Dependency("net.kyori", "adventure-text-minimessage", "4.17.0"))
     }
 
     fun load(dependency: Dependency, callback: (Dependency) -> Unit = {}) {
@@ -62,12 +62,7 @@ object DependencyHandler {
             }
         }
     }
-    class CustomURLClassLoader(vararg urls: URL) : URLClassLoader(urls, ClassLoader.getSystemClassLoader()) {
 
-        public override fun addURL(url: URL?) {
-            super.addURL(url)
-        }
-    }
     fun addToClassPath(path: Path) {
         CustomURLClassLoader(path.toUri().toURL()).addURL(path.toUri().toURL())
     }

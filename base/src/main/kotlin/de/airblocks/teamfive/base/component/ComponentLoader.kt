@@ -2,6 +2,7 @@ package de.airblocks.teamfive.base.component
 
 import de.airblocks.teamfive.base.dependency.DependencyHandler
 import de.airblocks.teamfive.base.utils.COMPONENT_FOLDER
+import de.airblocks.teamfive.base.utils.CustomURLClassLoader
 import de.airblocks.teamfive.base.utils.JSON
 import java.net.URLClassLoader
 import java.nio.file.Files
@@ -31,9 +32,12 @@ class ComponentLoader {
             JSON.decodeFromString<ComponentInfo>(reader.readText())
         }
 
-        componentInfo.libraries.forEach { DependencyHandler.load(it) }
+        componentInfo.libraries.forEach {
+            DependencyHandler.load(it)
+        }
 
-        val classLoader = URLClassLoader(arrayOf(path.toFile().toURI().toURL()))
+        val classLoader = CustomURLClassLoader(path.toUri().toURL())
+        classLoader.addURL(path.toUri().toURL())
 
         val clazz = Class.forName(componentInfo.mainClass, true, classLoader)
         val component = clazz.getDeclaredConstructor().newInstance() as BaseComponent
