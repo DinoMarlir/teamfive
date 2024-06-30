@@ -6,7 +6,7 @@ import de.airblocks.teamfive.base.server.GameServerFactory
 class LobbyComponent: BaseComponent() {
 
     companion object {
-        lateinit var instance: LobbyComponent
+        lateinit var instance: LobbyComponent; private set
     }
 
     override fun enable() {
