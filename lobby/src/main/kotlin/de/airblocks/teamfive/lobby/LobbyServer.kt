@@ -20,11 +20,12 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
     companion object {
         private val _queues: MutableMap<AbstractGameMode, Queue<*>> = mutableMapOf()
         val queues: MutableMap<AbstractGameMode, Queue<*>> get() {
-            _queues.putAll(
-                GamesRegistry.getAllGameModes().map {
-                    it to QueueImpl<AbstractGameMode>(name = it.name, maxPlayers = it.maxPlayers, minPlayersToStart = it.minPlayersToStart)
-                }.toMap()
-            )
+
+            GamesRegistry.getAllGameModes().map {
+                it to QueueImpl<AbstractGameMode>(name = it.name, maxPlayers = it.maxPlayers, minPlayersToStart = it.minPlayersToStart)
+            }.forEach {
+                if (!_queues.containsKey(it.first)) _queues[it.first] = it.second
+            }
             return _queues
         }
         val INSTANCE = MinecraftServer.getInstanceManager().createInstanceContainer()
