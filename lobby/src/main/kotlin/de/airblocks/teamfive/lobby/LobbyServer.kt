@@ -5,17 +5,16 @@ import de.airblocks.teamfive.base.games.GamesRegistry
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.FallbackStrategy
 import de.airblocks.teamfive.base.server.GameServer
-import de.airblocks.teamfive.lobby.inventory.QueueInventory
+import de.airblocks.teamfive.lobby.listener.initializeListener
+import de.airblocks.teamfive.lobby.queue.Queue
+import de.airblocks.teamfive.lobby.queue.QueueImpl
 import net.minestom.server.MinecraftServer
 import net.minestom.server.coordinate.Pos
-import net.minestom.server.event.player.PlayerBlockInteractEvent
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import java.util.*
-import de.airblocks.teamfive.lobby.queue.Queue
-import de.airblocks.teamfive.lobby.queue.QueueImpl
 
 class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(), displayName) {
 
@@ -29,6 +28,7 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
             )
             return _queues
         }
+        val INSTANCE = MinecraftServer.getInstanceManager().createInstanceContainer()
     }
 
     override fun enable() {
@@ -36,10 +36,7 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
             unit.modifier().fillHeight(0, 40, Block.SLIME_BLOCK)
         }
 
-        INSTANCE.eventNode().addListener(PlayerBlockInteractEvent::class.java) { event ->
-            val queueInventory = QueueInventory()
-            event.player.openInventory(queueInventory)
-        }
+        initializeListener()
     }
 
     override fun disable() {
@@ -59,5 +56,4 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
         player.inventory.addItemStack(ItemStack.of(Material.RECOVERY_COMPASS))
     }
 
-    val INSTANCE = MinecraftServer.getInstanceManager().createInstanceContainer()
 }
