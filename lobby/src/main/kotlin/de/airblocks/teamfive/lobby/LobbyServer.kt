@@ -5,6 +5,7 @@ import de.airblocks.teamfive.base.games.GamesRegistry
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.FallbackStrategy
 import de.airblocks.teamfive.base.server.GameServer
+import de.airblocks.teamfive.lobby.inventory.updateInventoryForPlayer
 import de.airblocks.teamfive.lobby.listener.initializeListener
 import de.airblocks.teamfive.lobby.queue.Queue
 import de.airblocks.teamfive.lobby.queue.QueueImpl
@@ -12,8 +13,6 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.coordinate.Pos
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
-import net.minestom.server.item.ItemStack
-import net.minestom.server.item.Material
 import java.util.*
 
 class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(), displayName) {
@@ -43,6 +42,7 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
     }
 
     override fun initializePlayer(player: GamePlayer) {
+        updateInventoryForPlayer(player)
     }
 
     override fun uninitializePlayer(player: GamePlayer) {
@@ -52,8 +52,6 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
         val player: GamePlayer = event.player as GamePlayer
         event.spawningInstance = INSTANCE
         player.respawnPoint = Pos(0.0, 42.0, 0.0)
-
-        player.inventory.addItemStack(ItemStack.of(Material.RECOVERY_COMPASS))
+        initializePlayer(player)
     }
-
 }
