@@ -2,6 +2,7 @@ package de.airblocks.teamfive.lobby.inventory
 
 import de.airblocks.teamfive.lobby.LobbyServer
 import de.airblocks.teamfive.lobby.queue.Queue
+import de.airblocks.teamfive.lobby.queue.exception.PlayerAlreadyInQueueException
 import de.airblocks.teamfive.lobby.queue.exception.QueueFullException
 import de.airblocks.teamfive.lobby.utils.currentQueue
 import net.kyori.adventure.text.Component
@@ -28,9 +29,12 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
         } ?: return@of
 
         try {
+            if (firstOrNull != player.currentQueue()) player.currentQueue()?.removePlayer(player)
             firstOrNull.addPlayer(player)
         } catch (e: QueueFullException) {
             player.sendMessage("Queue is full")
+        } catch (e: PlayerAlreadyInQueueException) {
+            player.currentQueue()?.removePlayer(player)
         }
 
         event.isCancelled = true
@@ -59,9 +63,6 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
         title = buildTitleForPlayer(player)
 
         val task = MinecraftServer.getSchedulerManager().submitTask {
-            LobbyServer.queues.values.forEach {
-                player.sendMessage(it.name)
-            }
             title = buildTitleForPlayer(player)
             return@submitTask TaskSchedule.seconds(1)
         }
