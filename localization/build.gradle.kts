@@ -10,4 +10,5 @@ repositories {
 dependencies {
     implementation(project(":base"))
     implementation(libs.bundles.serialization)
+    implementation(libs.bundles.kyori)
 }
