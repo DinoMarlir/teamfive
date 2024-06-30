@@ -30,6 +30,7 @@ abstract class AbstractCachedConfig<V>(
         val toFile = path.toFile()
 
         if (!toFile.exists()) {
+            toFile.parentFile.mkdirs()
             toFile.writeText(JSON.encodeToString(serializer, default))
         }
         return toFile
