@@ -3,6 +3,9 @@ package de.airblocks.teamfive.lobby.inventory
 import de.airblocks.teamfive.lobby.LobbyServer
 import de.airblocks.teamfive.lobby.queue.Queue
 import de.airblocks.teamfive.lobby.queue.exception.QueueFullException
+import de.airblocks.teamfive.lobby.utils.currentQueue
+import net.kyori.adventure.text.Component
+import net.minestom.server.MinecraftServer
 import net.minestom.server.entity.Player
 import net.minestom.server.event.EventListener
 import net.minestom.server.event.inventory.InventoryPreClickEvent
@@ -11,6 +14,8 @@ import net.minestom.server.inventory.InventoryType
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import net.minestom.server.tag.Tag
+import net.minestom.server.timer.Task
+import net.minestom.server.timer.TaskSchedule
 
 class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
 
@@ -28,6 +33,8 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
             player.sendMessage("Queue is full")
         }
     }
+
+    val playerSchedeulerMap: MutableMap<Player, Task> = mutableMapOf()
 
     init {
         for (i in 0..8) {
@@ -47,6 +54,19 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
             addListener(INVENTORY_CLICK_LISTENER)
 
         }
+
+        val task = MinecraftServer.getSchedulerManager().submitTask {
+
+            LobbyServer.queues.values.forEach {
+                player.sendMessage(it.name)
+            }
+
+            title = Component.text("Queue: ").append(player.currentQueue()?.name ?: Component.text("none"))
+            return@submitTask TaskSchedule.seconds(5)
+        }
+
+        playerSchedeulerMap[player] = task
+
         return super.addViewer(player)
     }
 
@@ -54,6 +74,10 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
         with(player.eventNode()) {
             removeListener(INVENTORY_CLICK_LISTENER)
         }
+
+        playerSchedeulerMap[player]?.cancel()
+        playerSchedeulerMap.remove(player)
+
         return super.removeViewer(player)
     }
 

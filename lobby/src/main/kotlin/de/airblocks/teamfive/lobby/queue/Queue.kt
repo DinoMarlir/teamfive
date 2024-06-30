@@ -16,6 +16,7 @@ abstract class Queue<G: AbstractGameMode> {
     fun addPlayer(player: Player) {
         if (playersIn.size < maxPlayers) {
             playersIn.add(player)
+            player.sendMessage(Component.text("You got added into the queue ").append(name))
             return
         }
 
@@ -24,5 +25,8 @@ abstract class Queue<G: AbstractGameMode> {
 
     fun removePlayer(player: Player) {
         playersIn.remove(player)
+        player.sendMessage(Component.text("You got removed from the queue ").append(name))
     }
+
+    fun getPlayers() = playersIn
 }
