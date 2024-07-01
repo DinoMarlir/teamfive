@@ -18,9 +18,11 @@ object GameServerFactory {
      * Registers a new server.
      *
      * @param server The server to be registered.
+     * @return The registered server.
      */
-    fun registerServer(server: GameServer) {
+    fun registerServer(server: GameServer): GameServer {
         servers[server.displayName] = server
+        return server
     }
 
     /**

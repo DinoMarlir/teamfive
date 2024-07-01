@@ -7,7 +7,7 @@ import net.kyori.adventure.text.Component
 import net.minestom.server.entity.Player
 
 // TODO: Implement game start in queue
-abstract class Queue<G: AbstractGameMode> {
+abstract class Queue<G: AbstractGameMode>(val gameMode: G) {
     private val playersIn: MutableList<Player> = mutableListOf()
 
     abstract val name: Component
