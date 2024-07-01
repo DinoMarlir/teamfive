@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.0"
-minestom = "edb73f0a5a"
+minestom = "77af815afe"
 kotlinx-serialization = "1.6.3"
 coroutines = "1.9.0-RC"
 ktor = "2.3.12"
