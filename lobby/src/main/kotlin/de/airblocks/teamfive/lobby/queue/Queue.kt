@@ -5,10 +5,12 @@ import de.airblocks.teamfive.lobby.queue.exception.PlayerAlreadyInQueueException
 import de.airblocks.teamfive.lobby.queue.exception.QueueFullException
 import net.kyori.adventure.text.Component
 import net.minestom.server.entity.Player
+import net.minestom.server.timer.Task
 
 // TODO: Implement game start in queue
-abstract class Queue<G: AbstractGameMode>(val gameMode: G) {
+abstract class Queue<G: AbstractGameMode>(val gameMode: G, val startQueue: Boolean = true) {
     private val playersIn: MutableList<Player> = mutableListOf()
+    var runnable: Task
 
     abstract val name: Component
 
@@ -34,4 +36,9 @@ abstract class Queue<G: AbstractGameMode>(val gameMode: G) {
     }
 
     fun getPlayers() = playersIn
+
+    init {
+        runnable  = QueueRunnableImpl(this, 30).createQueueRunnable()
+        if (startQueue && !runnable.isAlive) runnable
+    }
 }
