@@ -21,4 +21,8 @@ object PlayerRepository {
         registeredPlayerOrPut.set(player)
         registeredPlayerOrPut.push()
     }
+
+    fun saveAll() {
+        playerCache.forEach { (_, player) -> player.push() }
+    }
 }
