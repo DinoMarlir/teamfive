@@ -1,6 +1,7 @@
 package de.airblocks.teamfive.base
 
 import de.airblocks.teamfive.base.commands.ServerCommand
+import de.airblocks.teamfive.base.commands.TestCommand
 import de.airblocks.teamfive.base.component.ComponentLoader
 import de.airblocks.teamfive.base.dependency.DependencyHandler
 import de.airblocks.teamfive.base.models.MinecraftServerConfigModel
@@ -32,7 +33,10 @@ private val config = MinecraftServerConfig.get()
 fun main() {
     preStart()
     PlayerHandler.init()
-    MinecraftServer.getCommandManager().register(ServerCommand)
+
+    listOf(ServerCommand, TestCommand).forEach {
+        MinecraftServer.getCommandManager().register(it)
+    }
     ComponentLoader.INSTANCE.initialize()
     minecraftServer.start(config.ip, config.port)
 }

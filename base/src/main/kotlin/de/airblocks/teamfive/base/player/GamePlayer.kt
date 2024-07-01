@@ -5,6 +5,8 @@ import de.airblocks.teamfive.base.server.GameServerFactory
 import de.airblocks.teamfive.base.server.exception.GameServerNotExistsException
 import net.minestom.server.entity.Player
 import net.minestom.server.network.player.PlayerConnection
+import net.minestom.server.permission.Permission
+import net.minestom.server.permission.PermissionVerifier
 import java.util.*
 
 /**
@@ -17,6 +19,17 @@ import java.util.*
  * @param playerConnection The connection of the player.
  */
 class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnection): Player(uuid, username, playerConnection) {
+
+    /**
+     * Updates the player's data in the repository.
+     * This method should be called whenever the player's data changes and needs to be saved.
+     */
+    fun update() {
+        val playerOrCreate = PlayerRepository.getPlayerOrCreate(uuid)
+        playerOrCreate.username = username
+
+        PlayerRepository.savePlayer(uuid, playerOrCreate)
+    }
 
     /**
      * Returns the current server that the player is connected to.
@@ -51,5 +64,37 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
         currentServer().players.remove(uuid)
         server.initializePlayer(this)
         server.players[uuid] = this
+    }
+
+    override fun getAllPermissions(): MutableSet<Permission> {
+        return super.getAllPermissions()
+    }
+
+    override fun addPermission(permission: Permission) {
+        super.addPermission(permission)
+    }
+
+    override fun getPermission(permissionName: String): Permission? {
+        return super.getPermission(permissionName)
+    }
+
+    override fun hasPermission(permission: Permission): Boolean {
+        return super.hasPermission(permission)
+    }
+
+    override fun hasPermission(permissionName: String): Boolean {
+        return super.hasPermission(permissionName)
+    }
+
+    override fun hasPermission(permissionName: String, permissionVerifier: PermissionVerifier?): Boolean {
+        return super.hasPermission(permissionName, permissionVerifier)
+    }
+
+    override fun removePermission(permission: Permission) {
+        super.removePermission(permission)
+    }
+
+    override fun removePermission(permissionName: String) {
+        super.removePermission(permissionName)
     }
 }
