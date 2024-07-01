@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component
 
 abstract class AbstractGameMode {
     abstract val name: Component
+    abstract val simpleName: String
     abstract val description: Component
 
     abstract val gameServer: (id: String, displayName: String) -> GameServer

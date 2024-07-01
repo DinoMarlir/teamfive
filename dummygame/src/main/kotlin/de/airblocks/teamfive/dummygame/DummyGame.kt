@@ -7,6 +7,8 @@ import net.kyori.adventure.text.Component
 class DummyGame: AbstractGameMode() {
     override val name: net.kyori.adventure.text.Component
         get() = Component.text("DummyGame")
+    override val simpleName: String
+        get() = "DummyGame"
     override val description: net.kyori.adventure.text.Component
         get() = Component.text("A demo game mode.")
     override val gameServer: (id: String, displayName: String) -> GameServer

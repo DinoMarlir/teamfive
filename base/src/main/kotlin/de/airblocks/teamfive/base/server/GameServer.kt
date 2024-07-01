@@ -35,6 +35,11 @@ abstract class GameServer(
         enable()
     }
 
+    fun startWithCallback(callback: () -> Unit) {
+        start()
+        callback.invoke()
+    }
+
     fun stop(
         callback: () -> Unit = {}
     ) {

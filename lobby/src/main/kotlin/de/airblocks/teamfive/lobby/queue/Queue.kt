@@ -1,11 +1,16 @@
 package de.airblocks.teamfive.lobby.queue
 
 import de.airblocks.teamfive.base.games.AbstractGameMode
+import de.airblocks.teamfive.base.games.GamesRegistry
+import de.airblocks.teamfive.base.player.GamePlayer
+import de.airblocks.teamfive.base.server.GameServerFactory
+import de.airblocks.teamfive.base.utils.generateId
 import de.airblocks.teamfive.lobby.queue.exception.PlayerAlreadyInQueueException
 import de.airblocks.teamfive.lobby.queue.exception.QueueFullException
 import net.kyori.adventure.text.Component
 import net.minestom.server.entity.Player
 import net.minestom.server.timer.Task
+import java.util.*
 
 // TODO: Implement game start in queue
 abstract class Queue<G: AbstractGameMode>(val gameMode: G, val startQueue: Boolean = true) {
@@ -36,6 +41,20 @@ abstract class Queue<G: AbstractGameMode>(val gameMode: G, val startQueue: Boole
     }
 
     fun getPlayers() = playersIn
+
+    fun startNewGame() {
+        val generateId = generateId(8)
+        val gameServer = gameMode.gameServer(generateId, "queue-${gameMode.simpleName}-$generateId")
+
+        GameServerFactory.registerServer(gameServer).startWithCallback {
+            getPlayers().forEach {
+                val gamePlayer = it as GamePlayer
+                gamePlayer.sendToServer(gameServer)
+            }
+            
+            playersIn.clear()
+        }
+    }
 
     init {
         runnable  = QueueRunnableImpl(this, 30).createQueueRunnable()
