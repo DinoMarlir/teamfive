@@ -1,5 +1,5 @@
 # TeamFive
+A german Minecraft server based on Minestom
 
-## ToDos
-- `GameServers` for lobbies and games
-- `GamePlayers`
+## Specials
+We don't use a proxy, everything is running on one Minestom instance. This makes the server feel lightweight. Since we don't have many players, we have no issues with this technology!

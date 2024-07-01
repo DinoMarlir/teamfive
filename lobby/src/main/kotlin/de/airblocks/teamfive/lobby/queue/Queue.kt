@@ -8,7 +8,6 @@ import de.airblocks.teamfive.lobby.queue.exception.PlayerAlreadyInQueueException
 import de.airblocks.teamfive.lobby.queue.exception.QueueFullException
 import net.kyori.adventure.text.Component
 import net.minestom.server.entity.Player
-import net.minestom.server.timer.Task
 
 // TODO: Implement game start in queue
 abstract class Queue<G: AbstractGameMode>(val gameMode: G, val startQueue: Boolean = true) {

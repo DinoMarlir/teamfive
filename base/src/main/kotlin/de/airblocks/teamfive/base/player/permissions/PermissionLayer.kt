@@ -1,6 +1,6 @@
 package de.airblocks.teamfive.base.player.permissions
 
-import java.util.UUID
+import java.util.*
 
 abstract class PermissionLayer(uuid: UUID) {
 
