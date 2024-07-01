@@ -13,4 +13,8 @@ class PlayerPermissionLayer(val uuid: UUID): PermissionLayer(uuid) {
     override fun isDisabled(permission: String): Boolean {
         return !(PlayerRepository.getPlayerOrCreate(uuid).permissions[permission] ?: return true)
     }
+
+    override fun getPermissions(): Map<String, Boolean> {
+        return PlayerRepository.getPlayerOrCreate(uuid).permissions
+    }
 }
