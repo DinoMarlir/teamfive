@@ -13,6 +13,7 @@ import de.airblocks.teamfive.lobby.queue.Queue
 import de.airblocks.teamfive.lobby.queue.QueueImpl
 import net.minestom.server.MinecraftServer
 import net.minestom.server.coordinate.Pos
+import net.minestom.server.instance.LightingChunk
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
 import net.minestom.server.network.ConnectionState
@@ -37,7 +38,7 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
         INSTANCE.setGenerator { unit: GenerationUnit ->
             unit.modifier().fillHeight(0, 40, Block.SLIME_BLOCK)
         }
-
+        ChunkLightning.setChunkSupplierForInstance(INSTANCE)
         initializeListener()
         QueueBossbarDisplay.initialize()
         MinecraftServer.getCommandManager().register(QueueCommand())
