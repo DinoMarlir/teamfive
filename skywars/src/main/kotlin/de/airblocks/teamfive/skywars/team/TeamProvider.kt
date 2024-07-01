@@ -26,4 +26,8 @@ object TeamProvider {
     fun getTeamByPlayer(player: GamePlayer): Team? {
         return teams.values.find { it.getPlayers().contains(player) }
     }
+
+    fun getNextFreeTeam(): Team? {
+        return teams.values.find { !it.isFull() }
+    }
 }
