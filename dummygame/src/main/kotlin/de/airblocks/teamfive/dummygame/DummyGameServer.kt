@@ -23,7 +23,7 @@ class DummyGameServer(id: String, displayName: String): GameServer(id, displayNa
     }
 
     override fun initializePlayer(player: GamePlayer) {
-        player.setInstance(INSTANCE)
+        player.instance = INSTANCE
         player.teleport(Pos(0.0, 42.0, 0.0))
 
         player.sendMessage("Welcome to the Dummy Game!")
