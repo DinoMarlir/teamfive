@@ -20,7 +20,7 @@ abstract class QueueRunnable(val queue: Queue<*>) {
             }
 
             if (currentTime <= 0) {
-                //TODO: start game
+                queue.startNewGame()
             }
 
             return@submitTask TaskSchedule.seconds(1)
