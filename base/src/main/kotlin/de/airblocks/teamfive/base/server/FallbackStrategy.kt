@@ -2,6 +2,7 @@ package de.airblocks.teamfive.base.server
 
 import net.minestom.server.event.player.AsyncPlayerConfigurationEvent
 
+// TODO: implement fallback if a server stops
 abstract class FallbackStrategy {
     abstract fun asyncPlayerConfigurationEvent(event: AsyncPlayerConfigurationEvent)
 
