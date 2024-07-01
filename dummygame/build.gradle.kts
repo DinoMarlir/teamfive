@@ -8,5 +8,6 @@ repositories {
 
 dependencies {
     implementation(project(":base"))
+    implementation(libs.minestom)
     implementation(libs.bundles.kyori)
 }
