@@ -56,7 +56,7 @@ abstract class Queue<G: AbstractGameMode>(val gameMode: G, val startQueue: Boole
     }
 
     init {
-        runnable  = QueueRunnableImpl(this, 30).createQueueRunnable()
+        runnable  = QueueRunnableImpl(this).createQueueRunnable()
         if (startQueue && !runnable.isAlive) runnable
     }
 }

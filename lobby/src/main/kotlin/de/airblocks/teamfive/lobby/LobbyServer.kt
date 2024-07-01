@@ -13,7 +13,6 @@ import de.airblocks.teamfive.lobby.queue.Queue
 import de.airblocks.teamfive.lobby.queue.QueueImpl
 import net.minestom.server.MinecraftServer
 import net.minestom.server.coordinate.Pos
-import net.minestom.server.instance.LightingChunk
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
 import net.minestom.server.network.ConnectionState
