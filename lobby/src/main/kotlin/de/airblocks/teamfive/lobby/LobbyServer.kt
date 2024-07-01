@@ -5,6 +5,7 @@ import de.airblocks.teamfive.base.games.GamesRegistry
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.FallbackStrategy
 import de.airblocks.teamfive.base.server.GameServer
+import de.airblocks.teamfive.lobby.commands.QueueCommand
 import de.airblocks.teamfive.lobby.display.QueueBossbarDisplay
 import de.airblocks.teamfive.lobby.inventory.updateInventoryForPlayer
 import de.airblocks.teamfive.lobby.listener.initializeListener
@@ -22,7 +23,7 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
         private val _queues: MutableMap<AbstractGameMode, Queue<*>> = mutableMapOf()
         val queues: MutableMap<AbstractGameMode, Queue<*>> get() {
             GamesRegistry.getAllGameModes().map {
-                it to QueueImpl(name = it.name, maxPlayers = it.maxPlayers, minPlayersToStart = it.minPlayersToStart, it)
+                it to QueueImpl(name = it.name, simpleName = it.simpleName, maxPlayers = it.maxPlayers, minPlayersToStart = it.minPlayersToStart, it)
             }.forEach {
                 if (!_queues.containsKey(it.first)) _queues[it.first] = it.second
             }
@@ -38,6 +39,7 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
 
         initializeListener()
         QueueBossbarDisplay.initialize()
+        MinecraftServer.getCommandManager().register(QueueCommand())
     }
 
     override fun disable() {

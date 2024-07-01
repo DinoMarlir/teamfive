@@ -18,6 +18,7 @@ abstract class Queue<G: AbstractGameMode>(val gameMode: G, val startQueue: Boole
     var runnable: Task
 
     abstract val name: Component
+    abstract val simpleName: String
 
     abstract val minPlayersToStart: Int
     abstract val maxPlayers: Int
