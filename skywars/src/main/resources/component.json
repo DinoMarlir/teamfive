@@ -1,0 +1,8 @@
+{
+  "name": "skywars-game",
+  "authors": [
+    "DinoMarlir"
+  ],
+  "version": "0.1",
+  "mainClass": "de.airblocks.teamfive.skywars.SkyWarsComponent"
+}

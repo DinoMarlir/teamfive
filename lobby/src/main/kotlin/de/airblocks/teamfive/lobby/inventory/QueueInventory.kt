@@ -84,7 +84,7 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
     }
 
     private fun generateItemStackForQueue(queue: Queue<*>): ItemStack {
-        return ItemStack.of(Material.PLAYER_HEAD).with {
+        return ItemStack.of(queue.gameMode.displayMaterial).with {
             it.customName(queue.name)
             it.setTag(Tag.String("queue_name"), queue.name.toString())
         }
