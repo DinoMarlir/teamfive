@@ -13,7 +13,7 @@ import net.minestom.server.timer.Task
 // TODO: Implement game start in queue
 abstract class Queue<G: AbstractGameMode>(val gameMode: G, val startQueue: Boolean = true) {
     private val playersIn: MutableList<Player> = mutableListOf()
-    var runnable: Task
+    var runnable: QueueRunnable
 
     abstract val name: Component
     abstract val simpleName: String
@@ -56,7 +56,9 @@ abstract class Queue<G: AbstractGameMode>(val gameMode: G, val startQueue: Boole
     }
 
     init {
-        runnable  = QueueRunnableImpl(this).createQueueRunnable()
-        if (startQueue && !runnable.isAlive) runnable
+        runnable  = QueueRunnableImpl(this)
+
+        runnable.createQueueRunnable()
+        if (startQueue && !runnable.task.isAlive) runnable
     }
 }

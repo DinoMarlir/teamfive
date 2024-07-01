@@ -7,11 +7,11 @@ import net.minestom.server.timer.TaskSchedule
 abstract class QueueRunnable(val queue: Queue<*>) {
 
     val startTime: Int = 30
-    private var currentTime: Int = startTime; private set
-
+    var currentTime: Int = startTime; private set
+    lateinit var task: Task
 
     fun createQueueRunnable(): Task {
-        val task = MinecraftServer.getSchedulerManager().submitTask {
+        task = MinecraftServer.getSchedulerManager().submitTask {
             if (!queue.canStart()) {
                 currentTime = startTime
             } else {

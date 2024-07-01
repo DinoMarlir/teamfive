@@ -11,6 +11,6 @@ class DummyGame: AbstractGameMode() {
         { id: String, displayName: String ->
             DummyGameServer(id, displayName)
         }
-    override val minPlayersToStart = 6
+    override val minPlayersToStart = 1
     override val maxPlayers = 12
 }

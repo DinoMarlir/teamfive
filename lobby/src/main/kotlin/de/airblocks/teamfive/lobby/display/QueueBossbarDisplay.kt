@@ -22,7 +22,7 @@ object QueueBossbarDisplay {
                 bar.name(Component.text("No queue joined"))
             } else {
                 bar.name(queue.name.append(
-                    Component.text(": waiting for players... (${queue.getPlayers().size}/${queue.minPlayersToStart}/${queue.maxPlayers})")
+                    Component.text(": waiting for players... (${queue.getPlayers().size}/${queue.minPlayersToStart}/${queue.maxPlayers}) | ${queue.runnable.currentTime}")
                 ))
             }
         }
