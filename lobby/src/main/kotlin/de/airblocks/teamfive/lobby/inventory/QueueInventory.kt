@@ -90,7 +90,7 @@ class QueueInventory: Inventory(InventoryType.CHEST_4_ROW, "Queue") {
         }
     }
 
-    fun buildTitleForPlayer(player: Player): Component {
+    private fun buildTitleForPlayer(player: Player): Component {
         return Component.text("Queue: ").append(player.currentQueue()?.name ?: Component.text("none"))
     }
 }

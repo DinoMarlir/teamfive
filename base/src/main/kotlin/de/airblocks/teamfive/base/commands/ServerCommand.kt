@@ -2,7 +2,6 @@ package de.airblocks.teamfive.base.commands
 
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.server.GameServerFactory
-import io.ktor.client.request.*
 import net.minestom.server.MinecraftServer
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
