@@ -13,7 +13,7 @@ object ServerCommand: Command("server", "swap") {
         val serverArgument = ArgumentType.String("gameserver").setSuggestionCallback { commandSender, commandContext, suggestion ->
             val current = suggestion.input.split(" ")[1]
             GameServerFactory.getAllServers().map { it.displayName }.forEach { serverName ->
-                if (current == "" || current == " ") {
+                if (current == "" || current == " " || current == "\u0000") {
                     suggestion.addEntry(SuggestionEntry(serverName))
                     return@forEach
                 }
