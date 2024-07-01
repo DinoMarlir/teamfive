@@ -28,6 +28,10 @@ object ServerCommand: Command("server", "swap") {
             }
         }
 
+        setDefaultExecutor { commandSender, _ ->
+            commandSender.sendMessage("Available GameServers: ${GameServerFactory.getAllServers().map { it.displayName }.joinToString(", ")}")
+        }
+
         addSyntax({ sender, context ->
             val server: String = context.get(serverArgument)
             sender.sendMessage("Connecting you to GameServer $server...")
