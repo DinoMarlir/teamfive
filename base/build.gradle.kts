@@ -7,6 +7,15 @@ plugins {
 
 repositories {
     mavenCentral()
+
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/OWNER/REPO")
+        credentials {
+            username = project.findProperty("gpr.user") as String?
+            password = project.findProperty("gpr.token") as String?
+        }
+    }
 }
 
 dependencies {
@@ -44,8 +53,16 @@ java {
 
 publishing {
     publications {
-        create<MavenPublication>("base") {
+        create<MavenPublication>("baseGitHub") {
             from(components["java"])
+
+            groupId = groupId
+            artifactId = "base"
+            version = version
+
+            pom {
+                name.set("Base")
+            }
         }
     }
 }
