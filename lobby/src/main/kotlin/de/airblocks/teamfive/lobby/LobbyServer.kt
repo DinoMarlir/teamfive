@@ -15,6 +15,7 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.coordinate.Pos
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
+import net.minestom.server.network.ConnectionState
 import java.util.*
 
 class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(), displayName) {
@@ -47,9 +48,14 @@ class LobbyServer(displayName: String): GameServer(UUID.randomUUID().toString(),
 
     override fun initializePlayer(player: GamePlayer) {
         updateInventoryForPlayer(player)
+        if (player.playerConnection.connectionState == ConnectionState.PLAY) {
+            player.instance = INSTANCE
+            player.teleport(Pos(0.0, 42.0, 0.0))
+        }
     }
 
     override fun uninitializePlayer(player: GamePlayer) {
+        QueueBossbarDisplay.removePlayer(player)
     }
 
     override val fallbackStrategy = FallbackStrategy.Fallback { event ->
