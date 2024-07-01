@@ -5,7 +5,7 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.event.server.ServerListPingEvent
 
 class Branding {
-    val miniMessage = MiniMessage.miniMessage()
+    private val miniMessage = MiniMessage.miniMessage()
 
     fun apply() {
         MinecraftServer.getGlobalEventHandler().addListener(ServerListPingEvent::class.java) {
