@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.serialization)
     alias(libs.plugins.shadow)
+    `maven-publish`
 }
 
 repositories {
@@ -38,5 +39,13 @@ tasks.shadowJar {
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("base") {
+            from(components["java"])
+        }
     }
 }
