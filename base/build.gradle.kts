@@ -13,7 +13,7 @@ dependencies {
     compileOnly(libs.bundles.serialization)
     compileOnly(libs.coroutines)
     implementation(libs.bundles.ktor)
-    compileOnly(libs.bundles.kyori)
+    implementation(libs.bundles.kyori)
 }
 
 tasks.shadowJar {

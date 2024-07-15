@@ -3,6 +3,7 @@ package de.airblocks.teamfive.lobby.display
 import de.airblocks.teamfive.lobby.utils.currentQueue
 import net.kyori.adventure.bossbar.BossBar
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.minimessage.MiniMessage
 import net.minestom.server.MinecraftServer
 import net.minestom.server.entity.Player
 import net.minestom.server.timer.TaskSchedule
@@ -10,6 +11,8 @@ import net.minestom.server.timer.TaskSchedule
 object QueueBossbarDisplay {
 
     val playerBossBarMap: MutableMap<Player, BossBar> = mutableMapOf()
+
+    var offset = 0.0; private set
 
     val DISPLAY_RUNNABLE = MinecraftServer.getSchedulerManager().submitTask {
 
@@ -19,15 +22,28 @@ object QueueBossbarDisplay {
             val queue = player.currentQueue()
 
             if (queue == null) {
-                bar.name(Component.text("No queue joined"))
+                // Component.text("No queue joined")
+                bar.name(
+                    MiniMessage.miniMessage().deserialize("<gradient:#707CF7:#F658CF:$offset>No queue joined")
+                )
             } else {
-                bar.name(queue.name.append(
+                /*
+                queue.name.append(
                     Component.text(": waiting for players... (${queue.getPlayers().size}/${queue.minPlayersToStart}/${queue.maxPlayers}) | ${queue.runnable.currentTime}")
-                ))
+                )
+                 */
+                bar.name(
+                    MiniMessage.miniMessage().deserialize(
+                        "<gradient:#707CF7:#F658CF:$offset>Queue: ${queue.simpleName} | ${queue.getPlayers().size}/${queue.minPlayersToStart}/${queue.maxPlayers} | ${queue.runnable.currentTime}"
+                    )
+                )
             }
         }
 
-        return@submitTask TaskSchedule.seconds(1)
+        offset += 0.05
+        if (offset > 1.0) offset -= 2
+
+        return@submitTask TaskSchedule.tick(1)
     }
 
     fun initialize() {

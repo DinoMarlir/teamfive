@@ -9,4 +9,5 @@ repositories {
 dependencies {
     compileOnly(project(":base"))
     compileOnly(libs.minestom)
+    compileOnly(libs.bundles.kyori)
 }
