@@ -6,7 +6,6 @@ import java.util.*
 object PlayerRepository {
     private val playerCache: MutableMap<UUID, AbstractCachedConfig<SerializableGamePlayerModel>> = mutableMapOf()
 
-
     fun getRegisteredPlayerOrPut(uuid: UUID): AbstractCachedConfig<SerializableGamePlayerModel> {
         val first = playerCache[uuid] ?: SerializableGamePlayer(uuid, null).also { playerCache[uuid] = it }
         return first

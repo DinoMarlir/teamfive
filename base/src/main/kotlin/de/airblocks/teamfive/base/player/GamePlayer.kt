@@ -1,5 +1,6 @@
 package de.airblocks.teamfive.base.player
 
+import de.airblocks.teamfive.base.player.permissions.PermissionManager
 import de.airblocks.teamfive.base.server.GameServer
 import de.airblocks.teamfive.base.server.GameServerFactory
 import de.airblocks.teamfive.base.server.exception.GameServerNotExistsException
@@ -79,15 +80,15 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
     }
 
     override fun hasPermission(permission: Permission): Boolean {
-        return super.hasPermission(permission)
+        return PermissionManager.hasPermission(uuid, permission.permissionName)
     }
 
     override fun hasPermission(permissionName: String): Boolean {
-        return super.hasPermission(permissionName)
+        return PermissionManager.hasPermission(uuid, permissionName)
     }
 
     override fun hasPermission(permissionName: String, permissionVerifier: PermissionVerifier?): Boolean {
-        return super.hasPermission(permissionName, permissionVerifier)
+        return PermissionManager.hasPermission(uuid, permissionName)
     }
 
     override fun removePermission(permission: Permission) {
