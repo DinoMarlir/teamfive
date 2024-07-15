@@ -14,6 +14,7 @@ dependencies {
     compileOnly(libs.coroutines)
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.kyori)
+    implementation(kotlin("reflect"))
 }
 
 tasks.shadowJar {

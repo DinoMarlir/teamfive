@@ -2,20 +2,31 @@ package de.airblocks.teamfive.base.player.permissions
 
 import de.airblocks.teamfive.base.player.permissions.impl.PlayerPermissionLayer
 import java.util.*
+import kotlin.reflect.full.primaryConstructor
 
 object PermissionManager {
 
     // TODO: Layer
 
+    val layers = arrayListOf(
+        PlayerPermissionLayer::class
+    )
+
     fun hasPermission(uuid: UUID, permission: String): Boolean {
-        return PlayerPermissionLayer(uuid).hasPermission(permission)
+        return getAllLayers(uuid).any { it.hasPermission(permission) }
     }
 
     fun isDisabled(uuid: UUID, permission: String): Boolean {
-        return PlayerPermissionLayer(uuid).isDisabled(permission)
+        return getAllLayers(uuid).any { it.isDisabled(permission) }
     }
 
     fun getPermissions(uuid: UUID): Map<String, Boolean> {
         return PlayerPermissionLayer(uuid).getPermissions()
+    }
+
+    fun getAllLayers(uuid: UUID): List<PermissionLayer> {
+        return layers.map {
+            it.primaryConstructor!!.call(uuid)
+        }
     }
 }
