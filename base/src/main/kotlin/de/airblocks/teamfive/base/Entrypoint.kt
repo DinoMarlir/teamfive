@@ -7,12 +7,14 @@ import de.airblocks.teamfive.base.dependency.DependencyHandler
 import de.airblocks.teamfive.base.models.MinecraftServerConfigModel
 import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.player.PlayerHandler
+import de.airblocks.teamfive.base.player.permissions.group.PermissionGroupRepository
 import de.airblocks.teamfive.base.server.GameServerFactory
 import de.airblocks.teamfive.base.utils.AbstractCachedConfig
 import de.airblocks.teamfive.base.utils.initFolders
 import net.minestom.server.MinecraftServer
 import net.minestom.server.extras.MojangAuth
 import net.minestom.server.network.player.PlayerConnection
+import net.minestom.server.permission.Permission
 import java.nio.file.Path
 import java.util.*
 
@@ -53,4 +55,12 @@ fun preStart() {
     }
 
     GameServerFactory.getAllServers().forEach { println(it.displayName) }
+
+    permissionTest()
+}
+
+fun permissionTest() {
+    val groupOrCreate = PermissionGroupRepository.getGroupOrCreate("admin")
+
+    groupOrCreate.update()
 }

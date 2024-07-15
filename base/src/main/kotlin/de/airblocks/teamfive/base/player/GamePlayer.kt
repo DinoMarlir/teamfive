@@ -1,6 +1,8 @@
 package de.airblocks.teamfive.base.player
 
 import de.airblocks.teamfive.base.player.permissions.PermissionManager
+import de.airblocks.teamfive.base.player.permissions.group.PermissionGroup
+import de.airblocks.teamfive.base.player.permissions.group.PermissionGroupRepository
 import de.airblocks.teamfive.base.server.GameServer
 import de.airblocks.teamfive.base.server.GameServerFactory
 import de.airblocks.teamfive.base.server.exception.GameServerNotExistsException
@@ -20,6 +22,7 @@ import java.util.*
  * @param playerConnection The connection of the player.
  */
 class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnection): Player(uuid, username, playerConnection) {
+    private val permissionGroups = PlayerRepository.getPlayerOrCreate(uuid).groups.map { PermissionGroupRepository.getGroupOrCreate(it) }.toMutableList()
 
     /**
      * Updates the player's data in the repository.
@@ -28,6 +31,7 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
     fun update() {
         val playerOrCreate = PlayerRepository.getPlayerOrCreate(uuid)
         playerOrCreate.username = username
+        playerOrCreate.groups = permissionGroups.map { it.id }
 
         PlayerRepository.savePlayer(uuid, playerOrCreate)
     }
@@ -97,5 +101,17 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
 
     override fun removePermission(permissionName: String) {
         super.removePermission(permissionName)
+    }
+
+    fun getPermissionGroups(): List<PermissionGroup> {
+        return permissionGroups
+    }
+
+    fun addPermissionGroup(group: PermissionGroup) {
+        permissionGroups.add(group)
+    }
+
+    fun removePermissionGroup(group: PermissionGroup) {
+        permissionGroups.remove(group)
     }
 }

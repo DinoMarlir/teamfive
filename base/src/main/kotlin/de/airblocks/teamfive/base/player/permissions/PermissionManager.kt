@@ -1,5 +1,7 @@
 package de.airblocks.teamfive.base.player.permissions
 
+import de.airblocks.teamfive.base.player.permissions.group.PermissionGroup
+import de.airblocks.teamfive.base.player.permissions.group.PermissionGroupRepository
 import de.airblocks.teamfive.base.player.permissions.impl.PlayerPermissionLayer
 import java.util.*
 import kotlin.reflect.full.primaryConstructor

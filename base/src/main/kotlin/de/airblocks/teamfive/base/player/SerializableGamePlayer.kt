@@ -11,7 +11,8 @@ import java.util.*
 data class SerializableGamePlayerModel(
     @Serializable(with = UUIDSerializer::class) val uuid: UUID,
     var username: String?,
-    val permissions: HashMap<String, Boolean>
+    val permissions: HashMap<String, Boolean>,
+    var groups: List<String> = listOf()
 )
 
 val PLAYER_FOLDER = File(DATA_FOLDER, "players")

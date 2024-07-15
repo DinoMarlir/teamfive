@@ -4,16 +4,33 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PermissionGroup(
-    val id: String,
-    val name: String,
-    val permissions: Map<String, Boolean>,
-    private val dependencies: List<String>,
-    val priority: Int,
-    val default: Boolean,
-    val prefix: String?,
-    val suffix: String?,
-    val color: String?
+    var id: String,
+    var name: String,
+    var permissions: Map<String, Boolean>,
+    private var dependencies: List<String>,
+    var priority: Int,
+    var default: Boolean,
+    var prefix: String?,
+    var suffix: String?,
+    var color: String?
 ) {
+
+    fun update() {
+        val groupOrCreate = PermissionGroupRepository.getGroupOrCreate(id)
+
+        groupOrCreate.let { group ->
+            group.name = name
+            group.permissions = permissions
+            group.dependencies = dependencies
+            group.priority = priority
+            group.default = default
+            group.prefix = prefix
+            group.suffix = suffix
+            group.color = color
+        }
+
+        PermissionGroupRepository.saveGroup(id, groupOrCreate)
+    }
 
     class Builder(id: String) {
         private var current = PermissionGroup(
