@@ -24,7 +24,7 @@ object PermissionManager {
         return PlayerPermissionLayer(uuid).getPermissions()
     }
 
-    fun getAllLayers(uuid: UUID): List<PermissionLayer> {
+    private fun getAllLayers(uuid: UUID): List<PermissionLayer> {
         return layers.map {
             it.primaryConstructor!!.call(uuid)
         }
