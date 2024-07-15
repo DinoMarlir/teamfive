@@ -20,7 +20,7 @@ object TestCommand: Command("test") {
             val gamePlayer = MinecraftServer.getConnectionManager().getOnlinePlayerByUuid(uuid) as GamePlayer
 
             gamePlayer.update()
-            sender.sendMessage("Hello, ${gamePlayer.name} got saved!")
+            sender.sendMessage("Hello, ${gamePlayer.username} got saved!")
         }, argument)
     }
 }
