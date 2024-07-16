@@ -1,5 +1,6 @@
 package de.airblocks.teamfive.base.player.permissions.group
 
+import de.airblocks.teamfive.base.player.permissions.group.PermissionGroup.Companion.permissionGroup
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -14,6 +15,10 @@ data class PermissionGroup(
     var suffix: String?,
     var color: String?
 ) {
+
+    companion object {
+        fun permissionGroup(id: String, builder: PermissionGroup.Builder.() -> Unit) = PermissionGroup.Builder(id).apply(builder).build()
+    }
 
     fun update() {
         val groupOrCreate = PermissionGroupRepository.getGroupOrCreate(id)
