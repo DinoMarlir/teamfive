@@ -11,7 +11,7 @@ import java.util.*
 data class SerializableGamePlayerModel(
     @Serializable(with = UUIDSerializer::class) val uuid: UUID,
     var username: String?,
-    val permissions: HashMap<String, Boolean>,
+    var permissions: HashMap<String, Boolean>,
     var groups: List<String> = listOf()
 )
 

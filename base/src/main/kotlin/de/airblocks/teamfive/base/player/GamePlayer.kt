@@ -23,6 +23,7 @@ import java.util.*
  */
 class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnection): Player(uuid, username, playerConnection) {
     private val permissionGroups = PlayerRepository.getPlayerOrCreate(uuid).groups.map { PermissionGroupRepository.getGroupOrCreate(it) }.toMutableList()
+    private val permissions = PlayerRepository.getPlayerOrCreate(uuid).permissions
 
     /**
      * Updates the player's data in the repository.
@@ -32,6 +33,7 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
         val playerOrCreate = PlayerRepository.getPlayerOrCreate(uuid)
         playerOrCreate.username = username
         playerOrCreate.groups = permissionGroups.map { it.id }
+        playerOrCreate.permissions = permissions
 
         PlayerRepository.savePlayer(uuid, playerOrCreate)
     }
@@ -72,15 +74,16 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
     }
 
     override fun getAllPermissions(): MutableSet<Permission> {
-        return super.getAllPermissions()
+        return permissions.keys.map { Permission(it) }.toMutableSet()
     }
 
     override fun addPermission(permission: Permission) {
-        super.addPermission(permission)
+        permissions[permission.permissionName] = true
+        update()
     }
 
     override fun getPermission(permissionName: String): Permission? {
-        return super.getPermission(permissionName)
+        return if (hasPermission(permissionName)) Permission(permissionName) else null
     }
 
     override fun hasPermission(permission: Permission): Boolean {
@@ -109,9 +112,11 @@ class GamePlayer(uuid: UUID, username: String, playerConnection: PlayerConnectio
 
     fun addPermissionGroup(group: PermissionGroup) {
         permissionGroups.add(group)
+        update()
     }
 
     fun removePermissionGroup(group: PermissionGroup) {
         permissionGroups.remove(group)
+        update()
     }
 }

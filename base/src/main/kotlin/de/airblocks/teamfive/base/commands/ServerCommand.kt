@@ -6,6 +6,7 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.suggestion.SuggestionEntry
+import net.minestom.server.permission.Permission
 
 object ServerCommand: Command("server", "swap") {
 
@@ -38,6 +39,9 @@ object ServerCommand: Command("server", "swap") {
             val onlinePlayerByUuid =
                 (MinecraftServer.getConnectionManager().getOnlinePlayerByUuid(sender.identity().uuid()) ?: return@addSyntax) as GamePlayer
 
+            onlinePlayerByUuid.addPermission(Permission("test.test"))
+
+            if (onlinePlayerByUuid.hasPermission("test.test")) onlinePlayerByUuid.sendMessage("lol") else onlinePlayerByUuid.sendMessage("no perms")
             onlinePlayerByUuid.sendToServer(server)
         }, serverArgument)
     }
