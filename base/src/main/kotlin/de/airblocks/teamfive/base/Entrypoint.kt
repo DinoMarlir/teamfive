@@ -54,12 +54,4 @@ fun preStart() {
     }
 
     GameServerFactory.getAllServers().forEach { println(it.displayName) }
-
-    permissionTest()
-}
-
-fun permissionTest() {
-    val groupOrCreate = PermissionGroupRepository.getGroupOrCreate("admin")
-
-    groupOrCreate.update()
 }
