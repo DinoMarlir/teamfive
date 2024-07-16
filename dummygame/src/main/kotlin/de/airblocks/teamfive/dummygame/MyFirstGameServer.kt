@@ -1,7 +1,6 @@
 package de.airblocks.teamfive.dummygame
 
 import de.airblocks.teamfive.base.player.GamePlayer
-import de.airblocks.teamfive.base.server.FallbackStrategy
 import de.airblocks.teamfive.base.server.GameServer
 
 class MyFirstGameServer(

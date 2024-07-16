@@ -14,7 +14,6 @@ import de.airblocks.teamfive.base.utils.initFolders
 import net.minestom.server.MinecraftServer
 import net.minestom.server.extras.MojangAuth
 import net.minestom.server.network.player.PlayerConnection
-import net.minestom.server.permission.Permission
 import java.nio.file.Path
 import java.util.*
 

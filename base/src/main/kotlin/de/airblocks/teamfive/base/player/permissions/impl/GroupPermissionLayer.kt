@@ -1,8 +1,7 @@
 package de.airblocks.teamfive.base.player.permissions.impl
 
-import de.airblocks.teamfive.base.player.GamePlayer
 import de.airblocks.teamfive.base.player.permissions.PermissionLayer
-import java.util.UUID
+import java.util.*
 
 class GroupPermissionLayer(val uuid: UUID): PermissionLayer(uuid) {
 
