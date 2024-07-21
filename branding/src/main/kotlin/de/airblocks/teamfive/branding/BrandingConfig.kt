@@ -16,8 +16,8 @@ object BrandingConfig: AbstractCachedConfig<BrandingConfigModel>(
     path = Path.of(CONFIG_FOLDER.path.toString(), "branding.json"),
     default = BrandingConfigModel(
         maxPlayers = 50,
-        motdHeader = "<red>Welcome to TeamFive!",
-        motdFooter = "<rainbow>Have fun!"
+        motdHeader = "<gradient:red:blue>TeamFive</gradient> <gradient:blue:red>Branding</gradient>",
+        motdFooter = "<gradient:red:blue>Powered by</gradient> <gradient:blue:red>Minestom</gradient>"
     ),
     serializer = BrandingConfigModel.serializer(),
     deserializer = BrandingConfigModel.serializer()
